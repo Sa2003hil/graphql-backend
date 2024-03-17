@@ -10,8 +10,18 @@ async function init () {
 
   //  Create  GraphQl server
   const gqlserver = new ApolloServer({
-    typeDefs: '',
-    resolvers: {}
+    typeDefs: `
+       type Query{
+        hello: String
+        say(name:String):String
+       }
+    `,
+    resolvers: {
+      Query: {
+        hello: () => 'Hey there, I am a graphQL server',
+        say: (_, { name }: { name: String }) => `Hey ${name} , How are you ?`
+      }
+    }
   })
 
   //  Start the gql server
