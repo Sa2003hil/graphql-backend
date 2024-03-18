@@ -1,6 +1,9 @@
 import express from 'express'
 import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
+import { prismaClient } from './lib/db'
+
+import createAppoloGraphqlServer from './graphql'
 
 async function init () {
   const app = express()
@@ -8,14 +11,7 @@ async function init () {
 
   app.use(express.json())
 
-  //  Create  GraphQl server
-  const gqlserver = new ApolloServer({
-    typeDefs: '',
-    resolvers: {}
-  })
-
-  //  Start the gql server
-  await gqlserver.start()
+  const gqlserver = await createAppoloGraphqlServer()
 
   app.get('/', (req, res) => {
     res.json({
