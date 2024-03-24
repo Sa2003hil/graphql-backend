@@ -11,7 +11,7 @@ export interface CreateUserPayload {
 class UserService {
   public static createUser (payload: CreateUserPayload) {
     const { firstName, lastName, email, password } = payload
-    const salt = randomBytes(16).toString()
+    const salt = randomBytes(16).toString('hex')
     const hashedPassword = createHmac('sha256', salt)
       .update(password)
       .digest('hex')

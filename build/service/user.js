@@ -5,7 +5,7 @@ const node_crypto_1 = require("node:crypto");
 class UserService {
     static createUser(payload) {
         const { firstName, lastName, email, password } = payload;
-        const salt = (0, node_crypto_1.randomBytes)(16).toString();
+        const salt = (0, node_crypto_1.randomBytes)(16).toString('hex');
         const hashedPassword = (0, node_crypto_1.createHmac)('sha256', salt)
             .update(password)
             .digest('hex');
