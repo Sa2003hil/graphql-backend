@@ -53,6 +53,7 @@ class UserService {
                 throw new Error('Incorrect Password');
             }
             const token = jsonwebtoken_1.default.sign({ id: user.id, email: user.email }, JWT_SECRET);
+            return token;
         });
     }
 }
